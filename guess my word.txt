@@ -1,0 +1,67 @@
+import random
+3
+4 print("Welcome to the Guess My Word App")
+5
+6 #Create the dict to hold our words
+7 game_dict = {
+8 "sports":['basketball', 'baseball', 'soccer', 'football', 'tennis',
+'curling'],
+9 "colors":['orange', 'yellow', 'purple', 'aquamarine', 'violet', 'gold'],
+10 "fruits":['apple', 'banana', 'watermelon', 'peach', 'mango', 'strawberry'],
+11 "classes":['english', 'history', 'science', 'mathematics', 'art', 'health'],
+12 }
+13
+14 #Create a list of keys
+15 game_keys = []
+16 for key in game_dict.keys():
+17 game_keys.append(key)
+18
+19 #The main game loop
+20 playing = True
+21 while playing:
+22 #Randomly pick the game category and the game word from the game dictionary
+23 game_category = game_keys[random.randint(0,len(game_keys)-1)]
+24 game_word = game_dict[game_category][random.randint(0,
+len(game_dict[game_category])-1)]
+25
+26 #Build a dashed "-" word to represent the game word
+27 blank_word = []
+28 for letter in game_word:
+29 blank_word.append("-")
+30
+31 print("Guess a " + str(len(game_word)) + " letter word from the following
+category: " + game_category.title())
+32
+33 guess = ""
+34 guess_count = 0
+35
+36 #A single round loop
+37 while guess != game_word:
+38 #Get a single guess from the user
+39 print("".join(blank_word))
+40 guess = input("\nEnter your guess: ").lower()
+41 guess_count += 1
+42
+43 #Guess is correct, user won the game
+44 if guess == game_word:
+45 print("\nCorrect! You guessed the word in " + str(guess_count) + "
+guesses.")
+46 break
+47
+48 #Guess is incorrect, user must keep guessing
+49 else:
+50 print("That is not correct. let us reveal a letter to help you!")
+51 #Loop to replace "-" in blank_word to reveal a letter to help user
+52 swapping = True
+53 while swapping:
+54 letter_index = random.randint(0, len(game_word)-1)
+55 if blank_word[letter_index] == "-":
+56 blank_word[letter_index] = game_word[letter_index]
+57 swapping = False
+58
+59 #Ask the user to play again
+60 choice = input("\nWould you like to play again (y/n): ").lower()
+Page 117 
+61 if choice != 'y':
+62 playing = False
+63 print("Thank you for playing the game.")
